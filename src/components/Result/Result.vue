@@ -1,5 +1,7 @@
 <template lang="pug">
+
   section(v-text="resData")
+
 </template>
 
 

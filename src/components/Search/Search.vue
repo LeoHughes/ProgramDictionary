@@ -8,6 +8,7 @@
         button.pure-button(type="button" @click="search") Translate
 
       Result(:resData="result")
+
 </template>
 
 <style lang="less">
