@@ -16,7 +16,7 @@
   @import '../../assets/variable.less';
 
   #container{
-    margin-top: 10%;
+    margin: 5% auto;
     width: auto;
     height: 90%;
 
@@ -28,7 +28,7 @@
 
       .search-input {
         padding: 1rem 1.6rem;
-        width: auto;
+        width: 85%;
         font-size: 1.2rem;
         color: @black;
         border: 3px solid white;
@@ -42,6 +42,11 @@
         opacity: 0.8;
       }
 
+    }
+  }
+  @media screen and (min-width:480px){
+    #container{
+      max-width: 768px;
     }
   }
 </style>
