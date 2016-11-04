@@ -7,7 +7,7 @@
       p
         button.pure-button(type="button" @click="search") Translate
 
-      Result(:resData="result")
+      Result(v-bind:isShow="showResult" v-bind:resData="result")
 
 </template>
 
@@ -23,7 +23,7 @@
     right: 0;
     margin: auto;
     width: 90%;
-    height: 90%;
+    height: 80%;
 
     .search {
       width: 100%;
@@ -67,12 +67,15 @@
     data() {
       return {
         key: 'application',
+        showResult: false,
         result: []
       }
     },
     methods: {
       search() {
         let _self = this;
+
+        _self.showResult = true;
 
         if(_self.key === '') return
 
