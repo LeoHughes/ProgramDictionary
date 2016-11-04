@@ -27,8 +27,8 @@
       text-align: center;
 
       .search-input {
-        padding: 1rem 1.6rem;
-        width: 85%;
+        padding: 1rem .6rem;
+        width: 95%;
         font-size: 1.2rem;
         color: @black;
         border: 3px solid white;

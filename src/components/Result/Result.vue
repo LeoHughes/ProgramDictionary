@@ -36,8 +36,16 @@
     ul{
       margin: 0 0;
       padding: 0 0;
+      li{
+        list-style: none;
+      }
     }
 
+  }
+  @media screen and (min-width:480px){
+    #result{
+      padding: 1rem 2rem;
+    }
   }
 </style>
 
