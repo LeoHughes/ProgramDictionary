@@ -1,7 +1,7 @@
 <template lang="pug">
 
   .header
-    .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
+    .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal
       a.pure-menu-heading(v-text="title")
 
 </template>

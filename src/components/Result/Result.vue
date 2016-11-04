@@ -1,8 +1,16 @@
 <template lang="pug">
 
   #result(:class="{true : isShow}")
-    ul
-      li(v-for="item in resData" v-text="item.name")
+    p
+      button.pure-button(type="button" @click="goBack") back
+
+    ul(v-if="resData.length !== 0")
+      li(v-for="item in resData")
+        h2(v-text="item.name")
+        p(v-text="'[ 常见释义 ] : ' + item.transContent")
+
+    p(v-else).
+      暂无 <strong v-text="keyWord"></strong> 的查询结果，<a>点击添加</a>此词条信息
 
 </template>
 
@@ -11,16 +19,25 @@
   @import '../../assets/variable.less';
 
   #result{
-    opacity: 0;
-    width: 100%;
-    height: 70%;
-    margin: auto;
+    padding: .6rem .8rem;
+    width: auto;
+    height: 65%;
     background-color: @white;
+    border-radius: 5px;
+    text-align: left;
     overflow: auto;
+    opacity: 0;
+    transition: 600ms;
     &.true{
       opacity: 1;
       transition: 600ms;
     }
+
+    ul{
+      margin: 0 0;
+      padding: 0 0;
+    }
+
   }
 </style>
 
@@ -29,10 +46,13 @@
 
 export default {
   name: 'result',
-
   props: {
     isShow: {
       type: Boolean,
+      required: true
+    },
+    keyWord: {
+      type: String,
       required: true
     },
     resData: {
@@ -43,6 +63,11 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    goBack() {
+      this.$emit('goBack');
     }
   }
 }

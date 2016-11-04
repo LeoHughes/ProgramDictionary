@@ -7,7 +7,7 @@
       p
         button.pure-button(type="button" @click="search") Translate
 
-      Result(v-bind:isShow="showResult" v-bind:resData="result")
+      Result(v-bind:isShow="showResult" v-bind:keyWord="key" v-bind:resData="result" v-on:goBack="back")
 
 </template>
 
@@ -16,24 +16,19 @@
   @import '../../assets/variable.less';
 
   #container{
-    position: absolute;
-    top: 10%;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    width: 90%;
-    height: 80%;
+    margin-top: 10%;
+    width: auto;
+    height: 90%;
 
     .search {
-      width: 100%;
+      margin: auto;
+      width: 90%;
       height: 100%;
       text-align: center;
-      text-transform: uppercase;
 
       .search-input {
         padding: 1rem 1.6rem;
-        width: 80%;
+        width: auto;
         font-size: 1.2rem;
         color: @black;
         border: 3px solid white;
@@ -75,17 +70,26 @@
       search() {
         let _self = this;
 
-        _self.showResult = true;
+        if(_self.key === ''){
+          return;
+        }else{
 
-        if(_self.key === '') return
+          _self.showResult = true;
 
-        ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
-          var data = snapshot.val() || [];
+          ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
+            var data = snapshot.val() || [];
 
-          _self.result = data;
+            _self.result = data;
 
-        });
+          });
 
+        }
+
+      },
+      back() {
+        if(this.showResult) this.showResult = false;
+        this.key = '';
+        this.result = [];
       }
     }
   }
