@@ -4,7 +4,7 @@
     .search
       input.search-input(type="text" placeholder="Please enter the words"  @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
       p.info 翻译
-      p
+      p(v-if="!showResult")
         button.pure-button(type="button" @click="search") Translate
 
       Result(v-bind:isShow="showResult" v-bind:keyWord="key" v-bind:resData="result" v-on:goBack="back")
@@ -27,13 +27,16 @@
       text-align: center;
 
       .search-input {
-        padding: 1rem .6rem;
+        padding: 2.5%;
         width: 95%;
         font-size: 1.2rem;
         color: @black;
-        border: 3px solid white;
+        border: none;
         border-radius: 5px;
-        line-height: 1em;
+        line-height: 1rem;
+        &:active,&:focus{
+          outline: none;
+        }
       }
 
       .info {

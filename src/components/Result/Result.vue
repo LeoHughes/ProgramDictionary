@@ -1,7 +1,7 @@
 <template lang="pug">
 
   #result(:class="{true : isShow}")
-    p
+    p.back
       button.pure-button(type="button" @click="goBack") back
 
     ul(v-if="resData.length !== 0")
@@ -9,8 +9,8 @@
         h2(v-text="item.name")
         p(v-text="'[ 常见释义 ] : ' + item.transContent")
 
-    p(v-else).
-      暂无 <strong v-text="keyWord"></strong> 的查询结果，<a>点击添加</a>此词条信息
+    p.noDataInfo(v-else).
+      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link to="/add">点击添加</router-link>此词条信息
 
 </template>
 
@@ -38,6 +38,18 @@
       padding: 0 0;
       li{
         list-style: none;
+      }
+    }
+
+    p.back{
+      text-align: right;
+    }
+
+    p.noDataInfo{
+      a{
+        font-weight: bold;
+        color: @blue;
+        text-decoration: none;
       }
     }
 
