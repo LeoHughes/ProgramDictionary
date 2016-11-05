@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  #result(:class="{true : isShow}")
+  section#result(:class="{true : isShow}")
     p.back
       button.pure-button(type="button" @click="goBack") back
 
@@ -10,7 +10,7 @@
         p(v-text="'[ 常见释义 ] : ' + item.transContent")
 
     p.noDataInfo(v-else).
-      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link to="/add">点击添加</router-link>此词条信息
+      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>此词条信息
 
 </template>
 
@@ -27,10 +27,10 @@
     text-align: left;
     overflow: auto;
     opacity: 0;
-    transition: 600ms;
+    transition: 300ms;
     &.true{
       opacity: 1;
-      transition: 600ms;
+      transition: 300ms;
     }
 
     ul{

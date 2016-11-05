@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  #container
+  section#container
     .search
       input.search-input(type="text" placeholder="Please enter the words"  @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
       p.info 翻译
@@ -56,7 +56,7 @@
 
 <script>
   //引入result组件
-  import Result from '../Result/Result.vue'
+  import Result from '../Result/Result'
 
   import config from '../../../util/config.js'
 
