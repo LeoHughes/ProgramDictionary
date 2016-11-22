@@ -1,17 +1,18 @@
 <template lang="pug">
-
-  section#result(:class="{true : isShow}")
+  section#result(:class="{show : isShow}")
     p.back
-      button.pure-button(type="button" @click="goBack") back
+      a(@click="goBack") back
 
-    ul(v-if="resData.length !== 0")
+    ul.infoUl(v-if="resData.length !== 0")
       li(v-for="item in resData")
         h2(v-text="item.name")
         p(v-text="'[ 常见释义 ] : ' + item.transContent")
+        p(v-text="'[ 常见程序开发释义 ] : ' + item.description")
+        p.auth 贡献者：
+          a(:href="item.github" target="_blank" v-text="item.auth")
 
     p.noDataInfo(v-else).
-      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>此词条信息
-
+      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>此词条信息.
 </template>
 
 
@@ -28,25 +29,44 @@
     overflow: auto;
     opacity: 0;
     transition: 300ms;
-    &.true{
+    &.show{
       opacity: 1;
       transition: 300ms;
     }
 
-    ul{
+    ul.infoUl{
       margin: 0 0;
       padding: 0 0;
       li{
         list-style: none;
+        p.auth{
+          margin: 1.4rem 0;
+          text-align: right;
+          a{
+            color: @blue;
+            text-decoration: none;
+            &:hover,&:active,&:focus{
+              color: @blue;
+            }
+          }
+        }
       }
     }
 
     p.back{
+      margin: .4rem 0;
       text-align: right;
+      a{
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        font-family: @font;
+      }
     }
 
     p.noDataInfo{
+      font-size: 1.1rem;
       a{
+        margin: 0 5px;
         font-weight: bold;
         color: @blue;
         text-decoration: none;

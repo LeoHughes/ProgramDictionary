@@ -23,7 +23,7 @@ html,body{
 
     .app-container{
       width: auto;
-      height: auto;
+      height: 100%;
     }
 
   }
@@ -42,6 +42,7 @@ html,body{
       height: 90%;
       margin: 2.5% auto;
       border-radius: 5px;
+      box-shadow: 0 0 10px #888;
     }
 
   }
