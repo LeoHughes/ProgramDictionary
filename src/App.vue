@@ -38,7 +38,7 @@ html,body{
     background: linear-gradient(to right bottom,@white,@blue);
 
     #app{
-      width: 1024px;
+      width: 700px;
       height: 90%;
       margin: 2.5% auto;
       border-radius: 5px;
