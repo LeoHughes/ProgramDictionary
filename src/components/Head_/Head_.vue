@@ -1,16 +1,16 @@
 <template lang="pug">
-
   .header
-    .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal
-      a.pure-menu-heading(v-text="title")
-
+    a(v-text="title")
 </template>
 
 <style lang="less">
 
   @import '../../assets/variable.less';
 
-  .pure-menu-heading{
+  .header{
+    padding: 1.2rem .8rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
     color: @white;
   }
 

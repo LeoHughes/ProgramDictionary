@@ -1,14 +1,11 @@
 <template lang="pug">
+  #container
+    input.search-input(type="text" placeholder="Please enter the words"  @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
+    p.info 翻译【暂只支持英译中】
+    p(v-if="!showResult")
+      button.trans-button(type="button" @click="search") Translate
 
-  section#container
-    .search
-      input.search-input(type="text" placeholder="Please enter the words"  @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
-      p.info 翻译
-      p(v-if="!showResult")
-        button.pure-button(type="button" @click="search") Translate
-
-      Result(v-bind:isShow="showResult" v-bind:keyWord="key" v-bind:resData="result" v-on:goBack="back")
-
+    Result(v-bind:isShow="showResult" v-bind:keyWord="key" v-bind:resData="result" v-on:goBack="back")
 </template>
 
 <style lang="less">
@@ -16,48 +13,47 @@
   @import '../../assets/variable.less';
 
   #container{
-    margin: 5% auto;
-    width: auto;
-    height: 90%;
+    padding: 1rem 1.2rem;
+    margin: 0 auto;
+    height: 80%;
+    text-align: center;
 
-    .search {
-      margin: auto;
-      width: 90%;
-      height: 100%;
-      text-align: center;
-
-      .search-input {
-        padding: 2.5%;
-        width: 95%;
-        font-size: 1.2rem;
-        color: @black;
-        border: none;
-        border-radius: 5px;
-        line-height: 1rem;
-        &:active,&:focus{
-          outline: none;
-        }
+    .search-input {
+      margin: 0 auto;
+      padding: .8rem 1.2rem;
+      width: 80%;
+      font-size: 1.2rem;
+      color: @black;
+      border: none;
+      border-radius: 5px;
+      line-height: 1rem;
+      &:active,&:focus{
+        outline: none;
       }
-
-      .info {
-        color: #fff;
-        letter-spacing: 0.05em;
-        opacity: 0.8;
-      }
-
     }
-  }
-  @media screen and (min-width:480px){
-    #container{
-      max-width: 768px;
+
+    .info {
+      color: #fff;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
     }
+
+    .trans-button{
+      padding: .6rem 1.2rem;
+      background-color: @white;
+      border: none;
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      font-family: @font;
+      border-radius: 5px;
+    }
+
   }
+
 </style>
 
 <script>
-  //引入result组件
   import Result from '../Result/Result'
-
   import config from '../../../util/config.js'
 
   const ref = config()
