@@ -81,10 +81,11 @@
           _self.showResult = true;
 
           ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
-            var data = snapshot.val() || [];
+            var data = snapshot.val();
 
-            _self.result = data;
-
+            snapshot.forEach(function(snap){
+              _self.result.push(snap.val())
+            });
           });
 
         }

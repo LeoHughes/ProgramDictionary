@@ -11,8 +11,11 @@
         p.auth 贡献者：
           a(:href="item.github" target="_blank" v-text="item.auth")
 
-    p.noDataInfo(v-else).
-      暂无 <strong v-text="keyWord"></strong> 的查询结果，<router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>此词条信息.
+    .noDataInfo(v-else)
+      p.
+        暂无 <strong v-text="keyWord"></strong> 的查询结果.
+      p.addLink.
+        <router-link :to="{path:'/add',query:{key:keyWord}}">点击添加此词条信息</router-link>
 </template>
 
 
@@ -28,10 +31,10 @@
     text-align: left;
     overflow: auto;
     opacity: 0;
-    transition: 300ms;
+    transition: 800ms;
     &.show{
       opacity: 1;
-      transition: 300ms;
+      transition: 800ms;
     }
 
     ul.infoUl{
@@ -63,13 +66,17 @@
       }
     }
 
-    p.noDataInfo{
+    .noDataInfo{
       font-size: 1.1rem;
-      a{
-        margin: 0 5px;
-        font-weight: bold;
-        color: @blue;
-        text-decoration: none;
+      text-align: center;
+      .addLink{
+        margin-top: 1rem;
+        a{
+          margin: 0 5px;
+          font-weight: bold;
+          color: @blue;
+          text-decoration: none;
+        }
       }
     }
 

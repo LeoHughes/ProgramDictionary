@@ -1,7 +1,8 @@
 <template lang="pug">
   section#add
     Head_(:title="name")
-    div.addForm
+
+    .addForm(:class="{complate: addComplate}")
       .item
         .item-label Words:
         .item-input
@@ -21,7 +22,7 @@
       .item
         .item-label Github:
         .item-input
-          input(type="text" placeholder="Enter the URL of github.(20)" maxlength="20" v-model="word.github")
+          input(type="text" placeholder="Enter the URL of github.(30)" maxlength="30" v-model="word.github")
       .control-item
         button.btn.add(type="button" @click="add") Add
         button.btn.cancel(type="button" @click="back") Cancel
@@ -34,6 +35,9 @@
 
     .addForm{
       padding: .4rem 0;
+      height: 100%;
+      opacity: 1;
+      transition: opacity ease-out 1s;
 
       .item{
         padding: .4rem .8rem;
@@ -96,6 +100,10 @@
         }
       }
 
+      &.complate{
+        opacity: 0;
+      }
+
     }
 
   }
@@ -105,6 +113,8 @@
 <script>
   import Head_ from '../Head_/Head_'
   import config from '../../../util/config.js'
+
+  const ref = config()
 
   export default {
     name: 'add',
@@ -118,10 +128,18 @@
           name: this.$route.query.key,
           transContent: '',
           description: '',
-          date: '',
+          date: getDate(),
           auth: '',
           github: ''
-        }
+        },
+        addComplate: false
+      }
+    },
+    beforeRouteEnter (to, from, next) {
+      if(to.query.key){
+        next();
+      }else{
+        next('/');
       }
     },
     methods: {
@@ -131,8 +149,32 @@
       },
       //新增词条
       add(){
-        console.log(this.word);
+        // ref.push({
+        //   name: this.word.name,
+        //   transContent: this.word.transContent,
+        //   description: this.word.description,
+        //   date: this.word.date,
+        //   auth: this.word.auth,
+        //   github: this.word.github
+        // }).then(function(){
+        //   console.info('set data success.');
+        // }).catch(function(err){
+        //   console.info('set data failed', err.code, err);
+        // });
+
+        this.addComplate = true;
       }
     }
+  }
+
+  function getDate(){
+    let time = new Date(),
+        year = time.getFullYear(),
+        m = time.getMonth() + 1,
+        month = m < 10 ? ('0' + m) : m,
+        d = time.getDate(),
+        day = d < 10 ? ('0' + d) : d;
+
+    return `${year}/${month}/${day}`;
   }
 </script>

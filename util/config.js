@@ -5,7 +5,7 @@ export default function(){
     syncURL: 'https://dictionary.wilddogio.com'
   };
   wilddog.initializeApp(config);
-  const ref = wilddog.sync().ref('/dic/words');
+  const ref = wilddog.sync().ref('/words');
 
   return ref;
 
