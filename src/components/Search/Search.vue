@@ -80,6 +80,8 @@
 
           _self.showResult = true;
 
+          _self.result = [];
+
           ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
             var data = snapshot.val();
 
