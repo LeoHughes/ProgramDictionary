@@ -15,7 +15,7 @@
       p.
         暂无 <strong v-text="keyWord"></strong> 的查询结果.
       p.addLink.
-        <router-link :to="{path:'/add',query:{key:keyWord}}">点击添加此词条信息</router-link>
+        <router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>
 </template>
 
 

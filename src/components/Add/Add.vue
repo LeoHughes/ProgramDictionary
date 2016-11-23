@@ -6,7 +6,7 @@
       .item
         .item-label Words:
         .item-input
-          input(type="text" placeholder="Enter the new words.(20)" maxlength="20" v-model="word.name")
+          input(type="text" placeholder="Enter the new words.(20)" maxlength="20" v-model="word.name" disabled)
       .item
         .item-label Explanation:
         .item-input
@@ -57,11 +57,16 @@
             padding: .25rem;
             height: 100%;
             border: none;
+            background-color: @white;
             font-family: @font;
             font-size: 1rem;
             line-height: 1.2rem;
             &:focus,&:active{
               outline: none;
+            }
+            &:disabled{
+              background-color: @white;
+              color: @gray-deep;
             }
           }
 
@@ -89,6 +94,8 @@
           padding: 1rem 0;
           text-align: center;
           border: none;
+          font-family: @font;
+          font-size: 1.2rem;
           &.add{
             color: @black;
             background-color: @gray;
