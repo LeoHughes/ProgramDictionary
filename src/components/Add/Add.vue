@@ -2,7 +2,10 @@
   section#add
     Head_(:title="name")
 
-    .addForm(:class="{complate: addComplate}")
+
+    .addForm(v-if="!addComplate")
+      .item.warn(v-show="warnInfo !== ''")
+        p(v-text="warnInfo")
       .item
         .item-label Words:
         .item-input
@@ -10,22 +13,25 @@
       .item
         .item-label Explanation:
         .item-input
-          textarea(placeholder="Enter the explanations.(40)" maxlength="40" rows="3" v-model="word.transContent")
+          textarea(name="explanations" placeholder="Enter the explanations.(40)" maxlength="40" rows="3" required v-model.lazy.trim="word.transContent" @blur="checkVal")
       .item
         .item-label Description:
         .item-input
-          textarea(placeholder="Enter the program interpretation.(60)" maxlength="40" rows="5" v-model="word.description")
+          textarea(name="interpretation" placeholder="Enter the program interpretation.(60)" maxlength="40" rows="5" v-model.lazy.trim="word.description" @blur="checkVal")
       .item
         .item-label Author:
         .item-input
-          input(type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model="word.auth")
+          input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal")
       .item
         .item-label Github:
         .item-input
-          input(type="text" placeholder="Enter the URL of github.(30)" maxlength="30" v-model="word.github")
+          input(name="github URL" type="email" placeholder="Enter the URL of github.(30)" maxlength="30" v-model.lazy.trim="word.github" @blur="checkVal")
       .control-item
         button.btn.add(type="button" @click="add") Add
         button.btn.cancel(type="button" @click="back") Cancel
+
+    .complateInfo(v-if="showComplateInfo")
+      p(v-text="complateInfo")
 </template>
 
 <style lang="less">
@@ -34,16 +40,20 @@
   #add{
 
     .addForm{
-      padding: .4rem 0;
+      padding: .4rem 0 .8rem 0;
       height: 100%;
-      opacity: 1;
-      transition: opacity ease-out 1s;
 
       .item{
         padding: .4rem .8rem;
         margin: .8rem 0;
         background-color: @white;
         font-size: 1.2rem;
+
+        &.warn{
+          background-color: @gray;
+          p{font-family: @font;}
+        }
+
         .item-label{
           display: inline-table;
           width: 35%;
@@ -53,7 +63,7 @@
           display: inline-table;
           width: 65%;
 
-          input[type="text"]{
+          input[type="text"],input[type="email"]{
             padding: .25rem;
             height: 100%;
             border: none;
@@ -83,11 +93,23 @@
           }
 
         }
-
+      }
+      @media screen and (max-width: 480px){
+        .item{
+          .item-label{
+            display: block;
+            margin-bottom: 8px;
+            width: 100%;
+          }
+          .item-input{
+            display: block;
+            width: 100%;
+          }
+        }
       }
 
       .control-item{
-        margin-top: 5rem;
+        margin-top: 3rem;
         width: 100%;
         .btn{
           width: 50%;
@@ -107,10 +129,11 @@
         }
       }
 
-      &.complate{
-        opacity: 0;
-      }
+    }
 
+    .complateInfo{
+      padding: 1rem .8rem;
+      background-color: @white;
     }
 
   }
@@ -130,8 +153,9 @@
     },
     data() {
       return {
-        name: 'Add',
-        word: {
+        name: 'Add', //title
+        warnInfo: '', //form验证提示信息
+        word: { //新增词条数据
           name: this.$route.query.key,
           transContent: '',
           description: '',
@@ -139,7 +163,9 @@
           auth: '',
           github: ''
         },
-        addComplate: false
+        addComplate: false, //是否添加完毕
+        showComplateInfo: '', //是否展示添加完成提示信息，默认为空，添加完成后改为Boolean
+        complateInfo: '' //完成提示信息文字
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -149,27 +175,58 @@
         next('/');
       }
     },
+    watch: {
+      'addComplate'(){
+        if(this.addComplate) this.showComplateInfo = true;
+      }
+    },
     methods: {
+      //输入检测
+      checkVal(event) {
+        if(!event.target.value){
+          event.target.focus();
+          this.warnInfo = `Please check the ${event.target.name}.`;
+        }else{
+          this.warnInfo = '';
+        }
+      },
       //取消
       back() {
         this.$router.back();
       },
       //新增词条
       add(){
-        // ref.push({
-        //   name: this.word.name,
-        //   transContent: this.word.transContent,
-        //   description: this.word.description,
-        //   date: this.word.date,
-        //   auth: this.word.auth,
-        //   github: this.word.github
-        // }).then(function(){
-        //   console.info('set data success.');
-        // }).catch(function(err){
-        //   console.info('set data failed', err.code, err);
-        // });
 
-        this.addComplate = true;
+        for(let v in this.word){
+          if(!this.word[v]){
+            this.warnInfo = 'Please enter the corresponding data.';
+            return;
+          }
+        }
+
+        const v = this;
+
+        ref.push({
+          name: this.word.name,
+          transContent: this.word.transContent,
+          description: this.word.description,
+          date: this.word.date,
+          auth: this.word.auth,
+          github: this.word.github
+        }).then(function(){
+          v.complateInfo = 'Thanks for your help,wish you have a nice day :-D.';
+          v.addComplate = true;
+
+          setTimeout(function(){
+            v.back();
+          },3000);
+        }).catch(function(err){
+            v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?';
+            setTimeout(function(){
+              v.back();
+            },3000);
+        });
+
       }
     }
   }

@@ -31,10 +31,10 @@
     text-align: left;
     overflow: auto;
     opacity: 0;
-    transition: 800ms;
+    transition: 600ms;
     &.show{
       opacity: 1;
-      transition: 800ms;
+      transition: 600ms;
     }
 
     ul.infoUl{

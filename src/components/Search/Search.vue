@@ -23,6 +23,7 @@
       padding: .8rem 1.2rem;
       width: 80%;
       font-size: 1.2rem;
+      font-family: @font;
       color: @black;
       border: none;
       border-radius: 5px;
