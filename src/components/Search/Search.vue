@@ -1,6 +1,6 @@
 <template lang="pug">
   #container
-    input.search-input(type="text" placeholder="Please enter the words"  @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
+    input.search-input(id="searchInput" type="text" placeholder="Please enter the words" @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
     p.info 翻译【暂只支持英译中】
     p(v-if="!showResult")
       button.trans-button(type="button" @click="search") Translate
@@ -19,6 +19,7 @@
     text-align: center;
 
     .search-input {
+      box-sizing: border-box;
       margin: 0 auto;
       padding: .8rem 1.2rem;
       width: 80%;
@@ -26,9 +27,12 @@
       font-family: @font;
       color: @black;
       border: none;
-      border-radius: 5px;
+      border-radius: 15px;
       line-height: 1rem;
-      &:active,&:focus{
+      transition: ease-in-out .4s;
+      &:active,&:focus,&.active{
+        width: 100%;
+        border-radius: 0;
         outline: none;
       }
     }
@@ -71,11 +75,17 @@
         result: []
       }
     },
+    computed: {
+      keyLen() {
+        return this.key.length <= 20 ? true : false;
+      }
+    },
     methods: {
-      search() {
+      search(event) {
         let _self = this;
 
         if(_self.key === ''){
+          document.getElementById('searchInput').focus();
           return;
         }else{
 
