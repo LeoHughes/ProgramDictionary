@@ -30,7 +30,7 @@
       border-radius: 15px;
       line-height: 1rem;
       transition: ease-in-out .4s;
-      &:active,&:focus,&.active{
+      &:active,&:focus{
         width: 100%;
         border-radius: 0;
         outline: none;
@@ -70,14 +70,9 @@
     },
     data() {
       return {
-        key: 'application',
+        key: '',
         showResult: false,
         result: []
-      }
-    },
-    computed: {
-      keyLen() {
-        return this.key.length <= 20 ? true : false;
       }
     },
     methods: {

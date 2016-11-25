@@ -218,12 +218,12 @@
           v.addComplate = true;
 
           setTimeout(function(){
-            v.back();
+            v.$router.go(-1);
           },3000);
         }).catch(function(err){
             v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?';
             setTimeout(function(){
-              v.back();
+              v.$router.go(-1);
             },3000);
         });
 
