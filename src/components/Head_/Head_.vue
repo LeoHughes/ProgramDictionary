@@ -1,8 +1,6 @@
 <template lang="pug">
   .header
     a.bland(v-text="title")
-    a.user(v-if="userName" v-text="userName")
-    a.user(v-else) Login
 </template>
 
 <style lang="less">

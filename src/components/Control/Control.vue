@@ -6,25 +6,25 @@
       .item.warn(v-show="warnInfo !== ''")
         p(v-text="warnInfo")
       .item
-        .item-label Words:
+        .item-label Words*:
         .item-input
           input(type="text" placeholder="Enter the new words.(20)" maxlength="20" v-model="word.name" disabled)
       .item
-        .item-label Explanation:
+        .item-label Explanation*:
         .item-input
           textarea(name="explanations" placeholder="Enter the explanations.(40)" maxlength="40" rows="3" required v-model.lazy.trim="word.transContent" @blur="checkVal")
       .item
-        .item-label Description:
+        .item-label Description*:
         .item-input
           textarea(name="interpretation" placeholder="Enter the program interpretation.(60)" maxlength="40" rows="5" v-model.lazy.trim="word.description" @blur="checkVal")
       .item
-        .item-label Author:
+        .item-label Author*:
         .item-input
           input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal")
       .item
         .item-label Website:
         .item-input
-          input(name="website" type="url" placeholder="Enter the URL of website.(30)" maxlength="30" v-model.lazy.trim="word.email" @blur="checkVal")
+          input(name="website" type="url" placeholder="Enter website or email.(30)" maxlength="30" v-model.lazy.trim="word.website" @blur="checkVal")
       .control-item
         button.btn.add(type="button" @click="update") Complete
         button.btn.cancel(type="button" @click="back") Cancel
@@ -63,8 +63,9 @@
           width: 65%;
 
           input{
-            padding: .25rem;
+            padding: .25rem 0;
             height: 100%;
+            width: 100%;
             border: none;
             background-color: @white;
             font-family: @font;
