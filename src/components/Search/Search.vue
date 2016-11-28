@@ -64,7 +64,7 @@
   const ref = config()
 
   export default {
-    name: 'trans',
+    name: 'search',
     components: {
       Result
     },

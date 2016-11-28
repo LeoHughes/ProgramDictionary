@@ -1,6 +1,8 @@
 <template lang="pug">
   .header
-    a(v-text="title")
+    a.bland(v-text="title")
+    a.user(v-if="userName" v-text="userName")
+    a.user(v-else) Login
 </template>
 
 <style lang="less">
@@ -12,6 +14,13 @@
     font-size: 1.4rem;
     line-height: 1.4rem;
     color: @white;
+    overflow: hidden;
+    .bland{
+      float: left;
+    }
+    .user{
+      float: right;
+    }
   }
 
 </style>
@@ -19,7 +28,12 @@
 <script>
   export default {
     name: 'head_',
-    props: ['title'],
+    props: {
+      title: {
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {}
     }

@@ -10,7 +10,7 @@
         p(v-text="'[ 常见释义 ] : ' + item.transContent")
         p(v-text="'[ 常见程序开发释义 ] : ' + item.description")
         p.auth 贡献者：
-          a(:href="item.github" target="_blank" v-text="item.auth")
+          a(:href="item.website" target="_blank" v-text="item.auth")
 
     .noDataInfo(v-else)
       p.

@@ -22,11 +22,11 @@
         .item-input
           input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal")
       .item
-        .item-label Github:
+        .item-label Website:
         .item-input
-          input(name="github URL" type="email" placeholder="Enter the URL of github.(30)" maxlength="30" v-model.lazy.trim="word.github" @blur="checkVal")
+          input(name="website" type="url" placeholder="Enter the URL of website.(30)" maxlength="30" v-model.lazy.trim="word.email" @blur="checkVal")
       .control-item
-        button.btn.add(type="button" @click="add") Add
+        button.btn.add(type="button" @click="update") Complete
         button.btn.cancel(type="button" @click="back") Cancel
 
     .complateInfo(v-if="showComplateInfo")
@@ -62,7 +62,7 @@
           display: inline-table;
           width: 65%;
 
-          input[type="text"],input[type="email"]{
+          input{
             padding: .25rem;
             height: 100%;
             border: none;
@@ -146,7 +146,7 @@
   const ref = config()
 
   export default {
-    name: 'add',
+    name: 'control',
     components: {
       Head_
     },
@@ -160,7 +160,7 @@
           description: '',
           date: getDate(),
           auth: '',
-          github: ''
+          website: ''
         },
         addComplate: false, //是否添加完毕
         showComplateInfo: '', //是否展示添加完成提示信息，默认为空，添加完成后改为Boolean
@@ -183,6 +183,8 @@
           if(data){
             _self.word.transContent = data.transContent;
             _self.word.description = data.description;
+            _self.word.auth = data.auth;
+            _self.word.website = data.website;
           }
         })
       }
@@ -207,8 +209,8 @@
       back() {
         this.$router.back();
       },
-      //新增词条
-      add(){
+      //新增、编辑词条
+      update(){
 
         for(let v in this.word){
           if(!this.word[v]){
@@ -229,9 +231,11 @@
 
         }).catch(function(err){
             v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?';
+
             setTimeout(function(){
               v.$router.go(-1);
             },3000);
+
         });
 
       }
