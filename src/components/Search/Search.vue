@@ -1,6 +1,6 @@
 <template lang="pug">
   #container
-    input.search-input(id="searchInput" type="text" placeholder="Please enter the words" @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
+    input.search-input(id="searchInput" v-bind:class="{active : key.length > 0}" type="text" placeholder="Please enter the words" @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
     p.info 翻译【暂只支持英译中】
     p(v-if="!showResult")
       button.trans-button(type="button" @click="search") Translate
@@ -30,7 +30,7 @@
       border-radius: 15px;
       line-height: 1rem;
       transition: ease-in-out .4s;
-      &:active,&:focus{
+      &:active,&:focus,&.active{
         width: 100%;
         border-radius: 0;
         outline: none;

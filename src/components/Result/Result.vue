@@ -1,7 +1,8 @@
 <template lang="pug">
   section#result(:class="{show : isShow}")
-    p.back
-      a(@click="goBack") back
+    p.topBar
+      a.back(@click="goBack") back
+      router-link.edit(:to="{name:'Edit',query:{key:keyWord}}" v-show="resData.length !== 0") edit
 
     ul.infoUl(v-if="resData.length !== 0")
       li(v-for="item in resData")
@@ -15,7 +16,7 @@
       p.
         暂无 <strong v-text="keyWord"></strong> 的查询结果.
       p.addLink.
-        <router-link :to="{path:'/add',query:{key:keyWord}}">点击添加</router-link>
+        <router-link :to="{name:'Add',query:{key:keyWord}}">点击添加</router-link>
 </template>
 
 
@@ -56,13 +57,15 @@
       }
     }
 
-    p.back{
+    p.topBar{
       margin: .4rem 0;
-      text-align: right;
+      overflow: hidden;
       a{
         font-size: 1.2rem;
         line-height: 1.2rem;
         font-family: @font;
+        &.back{float:right;}
+        &.edit{float:left;color:@black;}
       }
     }
 

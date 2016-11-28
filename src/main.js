@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Add from './components/Add/Add'
+import Control from './components/Control/Control'
 
 // 声明使用vue-router
 Vue.use(VueRouter)
@@ -14,7 +14,13 @@ const routes = [
   },
   {
     path: '/add',
-    component: Add
+    name: 'Add',
+    component: Control
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Control
   }
 ]
 

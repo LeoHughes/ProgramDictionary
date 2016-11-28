@@ -2,7 +2,6 @@
   section#add
     Head_(:title="name")
 
-
     .addForm(v-if="!addComplate")
       .item.warn(v-show="warnInfo !== ''")
         p(v-text="warnInfo")
@@ -153,7 +152,7 @@
     },
     data() {
       return {
-        name: 'Add', //title
+        name: this.$route.name, //title
         warnInfo: '', //form验证提示信息
         word: { //新增词条数据
           name: this.$route.query.key,
@@ -174,6 +173,20 @@
       }else{
         next('/');
       }
+    },
+    beforeMount() {
+      var _self = this;
+
+      if(this.name === 'Edit'){
+        ref.orderByKey().equalTo(_self.word.name).on('value',function(snapshot){
+          const data = snapshot.child(_self.word.name).val();
+          if(data){
+            _self.word.transContent = data.transContent;
+            _self.word.description = data.description;
+          }
+        })
+      }
+
     },
     watch: {
       'addComplate'(){
@@ -206,20 +219,14 @@
 
         const v = this;
 
-        ref.push({
-          name: this.word.name,
-          transContent: this.word.transContent,
-          description: this.word.description,
-          date: this.word.date,
-          auth: this.word.auth,
-          github: this.word.github
-        }).then(function(){
+        ref.child(v.word.name).set(v.word).then(function(){
           v.complateInfo = 'Thanks for your help,wish you have a nice day :-D.';
           v.addComplate = true;
 
           setTimeout(function(){
             v.$router.go(-1);
           },3000);
+
         }).catch(function(err){
             v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?';
             setTimeout(function(){
