@@ -17,6 +17,13 @@ html,body{
   font-size: 14px;
   overflow: hidden;
 
+  //隐藏滚动条
+  ::-webkit-scrollbar
+  {
+  width: 0;
+  height: 0;
+  }
+
   #app{
     width: 100%;
     height: 100%;

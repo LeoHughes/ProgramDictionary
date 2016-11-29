@@ -1,9 +1,9 @@
 <template lang="pug">
 transition(name="transition-animation")
-  section#add
+  section#control
     Head_(:title="name")
 
-    .addForm(v-if="!addComplate")
+    .controlForm(v-if="!addComplate")
       .item.warn(v-show="warnInfo !== ''")
         p(v-text="warnInfo")
       .item
@@ -37,11 +37,11 @@ transition(name="transition-animation")
 <style lang="less">
   @import '../../assets/variable.less';
 
-  #add{
+  #control{
+    height: 100%;
 
-    .addForm{
+    .controlForm{
       padding: .4rem 0 .8rem 0;
-      height: 100%;
 
       .item{
         padding: .4rem .8rem;
