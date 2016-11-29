@@ -1,4 +1,5 @@
 <template lang="pug">
+transition(name="transition-animation")
   section#add
     Head_(:title="name")
 

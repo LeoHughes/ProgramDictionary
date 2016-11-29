@@ -1,4 +1,5 @@
 <template lang="pug">
+transition(name="transition-animation")
   section.app-container
     Head_(:title="name")
     Search
@@ -22,6 +23,30 @@ html,body{
     background: @blue;
     overflow-x: hidden;
     overflow-y: auto;
+
+    //过渡效果
+    .transition-animation-enter-active {
+      animation: bounce-in .4s;
+    }
+    .transition-animation-leave-active {
+      animation: bounce-out .4s;
+    }
+    @keyframes bounce-in {
+      0% {
+        transform: rotateY(90deg);
+      }
+      100% {
+        transform: rotateY(0);
+      }
+    }
+    @keyframes bounce-out {
+      0% {
+        transform: rotateY(0deg);
+      }
+      100% {
+        transform: rotateY(90deg);
+      }
+    }
 
     .app-container{
       width: auto;

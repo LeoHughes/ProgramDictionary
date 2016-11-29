@@ -1,22 +1,23 @@
 <template lang="pug">
-  section#result(:class="{show : isShow}")
-    p.topBar
-      a.back(@click="goBack") back
-      router-link.edit(:to="{name:'Edit',query:{key:keyWord}}" v-show="resData.length !== 0") edit
+  transition(name="transition-animation")
+    section#result(v-show="isShow")
+      p.topBar
+        a.back(@click="goBack") back
+        router-link.edit(:to="{name:'Edit',query:{key:keyWord}}" v-show="resData.length !== 0") edit
 
-    ul.infoUl(v-if="resData.length !== 0")
-      li(v-for="item in resData")
-        h2(v-text="item.name")
-        p(v-text="'[ 常见释义 ] : ' + item.transContent")
-        p(v-text="'[ 常见程序开发释义 ] : ' + item.description")
-        p.auth 贡献者：
-          a(:href="item.website" target="_blank" v-text="item.auth")
+      ul.infoUl(v-if="resData.length !== 0")
+        li(v-for="item in resData")
+          h2(v-text="item.name")
+          p(v-text="'[ 常见释义 ] : ' + item.transContent")
+          p(v-text="'[ 常见程序开发释义 ] : ' + item.description")
+          p.auth 贡献者：
+            a(:href="item.website" target="_blank" v-text="item.auth")
 
-    .noDataInfo(v-else)
-      p.
-        暂无 <strong v-text="keyWord"></strong> 的查询结果.
-      p.addLink.
-        <router-link :to="{name:'Add',query:{key:keyWord}}">点击添加</router-link>
+      .noDataInfo(v-else)
+        p.
+          暂无 <strong v-text="keyWord"></strong> 的查询结果.
+        p.addLink.
+          <router-link :to="{name:'Add',query:{key:keyWord}}">点击添加</router-link>
 </template>
 
 
@@ -31,12 +32,6 @@
     border-radius: 5px;
     text-align: left;
     overflow: auto;
-    opacity: 0;
-    transition: 600ms;
-    &.show{
-      opacity: 1;
-      transition: 600ms;
-    }
 
     ul.infoUl{
       margin: 0 0;
