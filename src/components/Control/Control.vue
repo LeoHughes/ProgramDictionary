@@ -17,11 +17,11 @@ transition(name="transition-animation")
       .item
         .item-label Description*:
         .item-input
-          textarea(name="interpretation" placeholder="Enter the program interpretation.(60)" maxlength="40" rows="5" v-model.lazy.trim="word.description" @blur="checkVal")
+          textarea(name="interpretation" placeholder="Enter the program interpretation.(60)" maxlength="40" rows="3" v-model.lazy.trim="word.description" @blur="checkVal")
       .item
         .item-label Author*:
         .item-input
-          input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal")
+          input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal" v-bind:disabled="this.name === 'Edit'")
       .item
         .item-label Website*:
         .item-input
@@ -38,7 +38,6 @@ transition(name="transition-animation")
   @import '../../assets/variable.less';
 
   #control{
-    height: 100%;
 
     .controlForm{
       padding: .4rem 0 .8rem 0;
@@ -143,9 +142,9 @@ transition(name="transition-animation")
 
 <script>
   import Head_ from '../Head_/Head_'
-  import config from '../../../util/config.js'
+  import {getRef} from '../../../util/config.js'
 
-  const ref = config()
+  const ref = getRef()
 
   export default {
     name: 'control',
@@ -209,6 +208,7 @@ transition(name="transition-animation")
       },
       //取消
       back() {
+        this.warnInfo = '';
         this.$router.back();
       },
       //新增、编辑词条

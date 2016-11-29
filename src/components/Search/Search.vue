@@ -59,9 +59,9 @@
 
 <script>
   import Result from '../Result/Result'
-  import config from '../../../util/config.js'
+  import {getRef} from '../../../util/config.js'
 
-  const ref = config()
+  const ref = getRef()
 
   export default {
     name: 'search',
@@ -84,12 +84,11 @@
           return;
         }else{
 
-          _self.showResult = true;
-
-          _self.result = [];
-
           ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
             var data = snapshot.val();
+
+            _self.showResult = true;
+            _self.result = [];
 
             snapshot.forEach(function(snap){
               _self.result.push(snap.val())
@@ -97,7 +96,6 @@
           });
 
         }
-
       },
       back() {
         if(this.showResult) this.showResult = false;

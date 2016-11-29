@@ -48,10 +48,10 @@ html,body{
     }
     @keyframes bounce-out {
       0% {
-        transform: rotateY(0deg);
+        opacity: 1;
       }
       100% {
-        transform: rotateY(90deg);
+        opacity: 0;
       }
     }
 
