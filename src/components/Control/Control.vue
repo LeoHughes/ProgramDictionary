@@ -22,7 +22,7 @@
         .item-input
           input(name="author name" type="text" placeholder="Enter the author name.(20)" maxlength="20" v-model.lazy.trim="word.auth" @blur="checkVal")
       .item
-        .item-label Website:
+        .item-label Website*:
         .item-input
           input(name="website" type="url" placeholder="Enter website or email.(30)" maxlength="30" v-model.lazy.trim="word.website" @blur="checkVal")
       .control-item
