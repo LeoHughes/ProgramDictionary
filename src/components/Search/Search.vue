@@ -2,6 +2,8 @@
   #container
     input.search-input(id="searchInput" v-bind:class="{active : key.length > 0}" type="text" placeholder="Please enter the words" @keyup.enter="search" v-model.lazy.trim="key" maxlength="30" required)
     p.info 翻译【暂只支持英译中】
+    p.info 词条总数：
+      span(v-text="wordsCount")
     p(v-if="!showResult")
       button.trans-button(type="button" @click="search") Translate
 
@@ -75,32 +77,38 @@
         result: []
       }
     },
+    props: {
+      wordsCount: {
+        type: [String,Number],
+        required: true
+      }
+    },
     methods: {
       search(event) {
         let _self = this;
 
         if(_self.key === ''){
-          document.getElementById('searchInput').focus();
-          return;
+          document.getElementById('searchInput').focus()
+          return
         }else{
 
-          ref.orderByChild('name').equalTo(_self.key).on("value",function(snapshot){
-            var data = snapshot.val();
+          ref.orderByChild('name').equalTo(_self.key).on("value",(snapshot)=>{
+            var data = snapshot.val()
 
-            _self.showResult = true;
-            _self.result = [];
+            _self.showResult = true
+            _self.result = []
 
-            snapshot.forEach(function(snap){
+            snapshot.forEach((snap)=>{
               _self.result.push(snap.val())
-            });
-          });
+            })
+          })
 
         }
       },
       back() {
-        if(this.showResult) this.showResult = false;
-        this.key = '';
-        this.result = [];
+        if(this.showResult) this.showResult = false
+        this.key = ''
+        this.result = []
       }
     }
   }

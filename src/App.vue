@@ -2,7 +2,7 @@
 transition(name="transition-animation")
   section.app-container
     Head_(:title="name")
-    Search
+    Search(:wordsCount="count")
 </template>
 
 <style lang="less">
@@ -18,6 +18,11 @@ html,body{
   overflow: hidden;
 
   //隐藏滚动条
+  ::scrollbar
+  {
+  width: 0;
+  height: 0;
+  }
   ::-webkit-scrollbar
   {
   width: 0;
@@ -84,8 +89,15 @@ html,body{
 </style>
 
 <script>
+
+//导入头部和搜索组件
 import Head_ from './components/Head_/Head_'
 import Search from './components/Search/Search'
+
+//导入wilddog配置
+import { getRef } from '../util/config.js'
+
+const ref = getRef()
 
 export default {
   name: 'app',
@@ -95,8 +107,16 @@ export default {
   },
   data() {
     return {
-      name: 'Dictionary'
+      name: 'Dictionary',
+      count: '正在计算中'
     }
+  },
+  beforeMount(){
+    const v = this;
+
+    ref.orderByKey().on('value',function(snapshot){
+      v.count = snapshot.numChildren()
+    });
   }
 }
 </script>

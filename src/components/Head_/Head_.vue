@@ -1,6 +1,8 @@
 <template lang="pug">
   .header
     a.bland(v-text="title")
+    router-link.top(:to={name:'Top'} v-if="title=='Dictionary'") Top
+    router-link.top(:to={name:'Index'} v-else) Back
 </template>
 
 <style lang="less">
@@ -16,7 +18,9 @@
     .bland{
       float: left;
     }
-    .user{
+    a.top{
+      color: @white;
+      text-decoration: none;
       float: right;
     }
   }
@@ -33,7 +37,9 @@
       }
     },
     data() {
-      return {}
+      return {
+
+      }
     }
   }
 </script>

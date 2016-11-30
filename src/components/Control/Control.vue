@@ -142,9 +142,10 @@ transition(name="transition-animation")
 
 <script>
   import Head_ from '../Head_/Head_'
-  import {getRef} from '../../../util/config.js'
+  import { getRef,getAuthorRef } from '../../../util/config.js'
 
-  const ref = getRef()
+  const ref = getRef(),
+        authorRef = getAuthorRef()
 
   export default {
     name: 'control',
@@ -170,9 +171,9 @@ transition(name="transition-animation")
     },
     beforeRouteEnter (to, from, next) {
       if(to.query.key){
-        next();
+        next()
       }else{
-        next('/');
+        next('/')
       }
     },
     beforeMount() {
@@ -180,20 +181,22 @@ transition(name="transition-animation")
 
       if(this.name === 'Edit'){
         ref.orderByKey().equalTo(_self.word.name).on('value',function(snapshot){
-          const data = snapshot.child(_self.word.name).val();
+          const data = snapshot.child(_self.word.name).val()
+
           if(data){
-            _self.word.transContent = data.transContent;
-            _self.word.description = data.description;
-            _self.word.auth = data.auth;
-            _self.word.website = data.website;
+            _self.word.transContent = data.transContent
+            _self.word.description = data.description
+            _self.word.auth = data.auth
+            _self.word.website = data.website
           }
+
         })
       }
 
     },
     watch: {
       'addComplate'(){
-        if(this.addComplate) this.showComplateInfo = true;
+        if(this.addComplate) this.showComplateInfo = true
       }
     },
     methods: {
@@ -201,57 +204,80 @@ transition(name="transition-animation")
       checkVal(event) {
         if(!event.target.value){
           event.target.focus();
-          this.warnInfo = `Please check the ${event.target.name}.`;
+          this.warnInfo = `Please check the ${event.target.name}.`
         }else{
-          this.warnInfo = '';
+          this.warnInfo = ''
         }
       },
       //取消
       back() {
-        this.warnInfo = '';
-        this.$router.back();
+        this.warnInfo = ''
+        this.$router.back()
       },
       //新增、编辑词条
       update(){
 
         for(let v in this.word){
           if(!this.word[v]){
-            this.warnInfo = 'Please enter the corresponding data.';
-            return;
+            this.warnInfo = 'Please enter the corresponding data.'
+            return
           }
         }
 
         const v = this;
 
-        ref.child(v.word.name).set(v.word).then(function(){
-          v.complateInfo = 'Thanks for your help,wish you have a nice day :-D.';
-          v.addComplate = true;
+        //保存数据
+        ref.child(v.word.name).set(v.word).then(()=>{
+          v.complateInfo = 'Thanks for your help,wish you have a nice day :-D.'
+          v.addComplate = true
+
+          authorCountAdd(v)
 
           setTimeout(function(){
-            v.$router.go(-1);
-          },3000);
+            v.$router.go(-1)
+          },3000)
 
-        }).catch(function(err){
-            v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?';
+        }).catch((err)=>{
+            v.complateInfo = 'Because some unpredictable reasons fail,or you will come back a little :-D?'
 
             setTimeout(function(){
-              v.$router.go(-1);
-            },3000);
+              v.$router.go(-1)
+            },3000)
 
-        });
+        })
 
       }
     }
   }
 
+  //新增则Author贡献+1
+  function authorCountAdd(v){
+    if(v.name === 'Add'){
+      authorRef.orderByKey().equalTo(v.word.auth).once('value',(snapshot)=>{
+        let authData = snapshot.child(v.word.auth).val()
+
+        if(authData){
+          authData.count += 1
+          authorRef.child(v.word.auth).update(authData)
+        }else{
+          authData = {}
+          authData.name = v.word.auth
+          authData.count = 1
+          authorRef.child(v.word.auth).set(authData)
+        }
+      })
+    }
+  }
+
+  //获得日期
   function getDate(){
     let time = new Date(),
         year = time.getFullYear(),
         m = time.getMonth() + 1,
         month = m < 10 ? ('0' + m) : m,
         d = time.getDate(),
-        day = d < 10 ? ('0' + d) : d;
+        day = d < 10 ? ('0' + d) : d
 
-    return `${year}/${month}/${day}`;
+    return `${year}/${month}/${day}`
   }
 </script>

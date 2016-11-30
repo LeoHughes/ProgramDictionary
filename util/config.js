@@ -2,21 +2,25 @@
 const config = {
   authDomain: "dictionary.wilddogio.com",
   syncURL: 'https://dictionary.wilddogio.com'
-};
+}
 
 //应用初始化
-wilddog.initializeApp(config);
+wilddog.initializeApp(config)
 
 //获取应用实例
-const getWilddog = function(){
-  return wilddog;
+const getWilddog = () => {
+  return wilddog
 }
 
-//获取Reference
-const getRef = function(){
-  const ref = wilddog.sync().ref('/words');
-  return ref;
+//获取词条Reference
+const getRef = () => {
+  return wilddog.sync().ref('/words')
+}
+
+//获取作者Reference
+const getAuthorRef = () => {
+  return wilddog.sync().ref('/author')
 }
 
 
-export {getWilddog,getRef}
+export { getWilddog, getRef, getAuthorRef }
