@@ -25,7 +25,7 @@ transition(name="transition-animation")
       .item
         .item-label Website*:
         .item-input
-          input(name="website" type="url" placeholder="Enter website or email.(30)" maxlength="30" v-model.lazy.trim="word.website" @blur="checkVal")
+          input(name="website" type="url" placeholder="Enter website or email.(40)" maxlength="40" v-model.lazy.trim="word.website" @blur="checkVal")
       .control-item
         button.btn.add(type="button" @click="update") Complete
         button.btn.cancel(type="button" @click="back") Cancel

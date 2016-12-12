@@ -17,9 +17,9 @@
 <script>
 
   import Head_ from '../Head_/Head_'
-  import { getWilddog,getRef } from '../../../util/config.js'
+  import { getAuthorRef,getRef } from '../../../util/config.js'
 
-  const ref = getRef()
+  const authorRef = getAuthorRef()
 
   export default {
     name: 'top',
@@ -29,11 +29,23 @@
     data() {
       return {
         name: this.$route.name,
-        list: []
+        topList: []
       }
     },
-    beforeMount() {
+    created() {
+      let _self = this;
 
+      authorRef.orderByChild('name').on('value',(snaphot)=>{
+        console.log(snaphot.val())
+
+        // let dataArr = snaphot.val()
+
+        // dataArr.sort((a,b)=>{
+        //   return (a.count > b.count) ? 1 : -1
+        // })
+
+        // _self.topList = dataArr
+      })
     }
   }
 </script>
