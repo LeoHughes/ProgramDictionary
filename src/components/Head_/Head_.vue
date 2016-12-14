@@ -1,7 +1,7 @@
 <template lang="pug">
   .header
     a.bland(v-text="title")
-    router-link.top(:to={name:'Top'} v-if="title=='Dictionary'") Top
+    router-link.top(:to={name:'Top'} v-if="title === 'Dictionary'") Top
     router-link.top(:to={name:'Index'} v-else) Back
 </template>
 
