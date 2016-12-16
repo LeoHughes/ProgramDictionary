@@ -38,6 +38,8 @@ transition(name="transition-animation")
   @import '../../assets/variable.less';
 
   #control{
+    width: 100%;
+    height: 100%;
 
     .controlForm{
       padding: .4rem 0 .8rem 0;

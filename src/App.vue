@@ -112,11 +112,13 @@ export default {
     }
   },
   beforeMount(){
+
     const v = this;
 
     ref.orderByKey().on('value',function(snapshot){
       v.count = snapshot.numChildren()
     });
+
   }
 }
 </script>
