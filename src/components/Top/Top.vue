@@ -46,7 +46,7 @@
           }
 
           &.list-enter-active, &.list-leave-active {
-            transition: all .4s;
+            transition: all .8s;
           }
           &.list-enter, &.list-leave-active {
             opacity: 0;
