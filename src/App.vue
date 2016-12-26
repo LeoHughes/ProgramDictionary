@@ -15,6 +15,7 @@ html,body{
   height: 100%;
   font-family: @font;
   font-size: 14px;
+  background-color: @gray;
   overflow: hidden;
 
   //隐藏滚动条
@@ -30,11 +31,13 @@ html,body{
   }
 
   #app{
+    position: relative;
     width: 100%;
     height: 100%;
     background: @blue;
     overflow-x: hidden;
     overflow-y: auto;
+    z-index: 999;
 
     //过渡效果
     .transition-animation-enter-active {
@@ -73,15 +76,15 @@ html,body{
   html,body{
     width: 100%;
     height: 100%;
-    background: -webkit-linear-gradient(right bottom,@white,@blue);
-    background: linear-gradient(to right bottom,@white,@blue);
 
     #app{
+      position: relative;
       width: 700px;
       height: 90%;
       margin: 2.5% auto;
-      border-radius: 5px;
-      box-shadow: 0 0 10px #888;
+      border-radius: 2%;
+      box-shadow: 0 0 10px @gray-deep;
+      z-index: 999;
     }
 
   }
