@@ -42,7 +42,7 @@ transition(name="transition-animation")
     height: 100%;
 
     .controlForm{
-      padding: .4rem 0 .8rem 0;
+      padding: .4rem .8rem .8rem .8rem;
 
       .item{
         padding: .4rem .8rem;

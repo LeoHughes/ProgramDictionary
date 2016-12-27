@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Control from './components/Control/Control'
 import Top from './components/Top/Top'
+import About from './components/About/About'
 
 // 声明使用vue-router
 Vue.use(VueRouter)
@@ -28,6 +29,11 @@ const routes = [
     path: '/top',
     name: 'Top',
     component: Top
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
   }
 ]
 

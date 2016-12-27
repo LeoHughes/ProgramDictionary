@@ -38,14 +38,18 @@
       padding: 0 0;
       li{
         list-style: none;
-        p.auth{
-          margin: 1.4rem 0;
-          text-align: right;
-          a{
-            color: @blue;
-            text-decoration: none;
-            &:hover,&:active,&:focus{
+        p{
+          margin: 1.2rem 0;
+          font-size: 1.1rem;
+          line-height: 1.8rem;
+          &.auth{
+            text-align: right;
+            a{
               color: @blue;
+              text-decoration: none;
+              &:hover,&:active,&:focus{
+                color: @blue;
+              }
             }
           }
         }

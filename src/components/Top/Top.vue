@@ -22,6 +22,7 @@
     height: 100%;
 
     #topList{
+      padding: .8rem;
       ul{
         margin: 0 0;
         padding: 0 0;

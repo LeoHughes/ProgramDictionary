@@ -8,6 +8,9 @@
       button.trans-button(type="button" @click="search") Translate
 
     Result(v-bind:isShow="showResult" v-bind:keyWord="key" v-bind:resData="result" v-on:goBack="back")
+
+    p.brand-info(v-if="!showResult")
+      router-link(v-bind:to="{name:'About'}") @about
 </template>
 
 <style lang="less">
@@ -15,7 +18,8 @@
   @import '../../assets/variable.less';
 
   #container{
-    padding: 1rem 1.2rem;
+    position: relative;
+    padding: .8rem;
     margin: 0 auto;
     height: 80%;
     text-align: center;
@@ -53,6 +57,17 @@
       line-height: 1.2rem;
       font-family: @font;
       border-radius: 5px;
+    }
+
+    .brand-info{
+      position: absolute;
+      margin: 0 auto;
+      bottom: 0;
+      right: .8rem;
+      a{
+        color: @white;
+        text-decoration: none;
+      }
     }
 
   }

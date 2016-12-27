@@ -31,10 +31,14 @@ html,body{
   }
 
   #app{
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
     position: relative;
     width: 100%;
     height: 100%;
     background: @blue;
+    border-left: 5px dashed @white;
+    border-right: 5px solid transparent;
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 999;
@@ -82,7 +86,8 @@ html,body{
       width: 700px;
       height: 90%;
       margin: 2.5% auto;
-      border-radius: 2%;
+      border-left: 10px dashed @white;
+      border-radius: 0 2% 2% 0;
       box-shadow: 0 0 10px @gray-deep;
       z-index: 999;
     }
