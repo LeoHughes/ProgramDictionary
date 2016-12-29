@@ -74,6 +74,19 @@ html,body{
 
   }
 
+  #bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: @white;
+    transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    z-index: 99;
+  }
+
 }
 
 @media screen and (min-width:1024px){
@@ -90,6 +103,10 @@ html,body{
       border-radius: 0 2% 2% 0;
       box-shadow: 0 0 10px @gray-deep;
       z-index: 999;
+    }
+
+    #bg{
+      display: block;
     }
 
   }
