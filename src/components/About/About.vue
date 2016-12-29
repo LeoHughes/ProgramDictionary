@@ -2,7 +2,9 @@
 transition(name="transition-animation")
   section#about
     Head_(:title="name")
-    #about-info(v-text="text")
+    #about-info
+      p(v-text="text")
+      p(v-text="text_translation")
 </template>
 
 <style lang="less">
@@ -53,7 +55,8 @@ transition(name="transition-animation")
 <script>
   import Head_ from '../Head_/Head_'
 
-  const description = '这是一个翻译程序开发英文单词的小型SPA应用，任何人都可以添加、修改词条信息。'
+  const description = '这是一个翻译开发英文单词的小型SPA应用，任何人都可以添加、修改词条信息。',
+        description_translation = 'This is a translation of small English word SPA application, anyone can add, modify the entry information.'
 
   export default {
     name: 'about',
@@ -63,7 +66,8 @@ transition(name="transition-animation")
     data() {
       return {
         name: this.$route.name,
-        text: description
+        text: description,
+        text_translation: description_translation
       }
     }
   }
