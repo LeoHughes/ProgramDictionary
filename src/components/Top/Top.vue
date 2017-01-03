@@ -83,13 +83,13 @@
       }
     },
     created() {
-      let _self = this;
+      let v = this;
 
       authorRef.orderByChild('count').limitToFirst(10).on('child_added',(snapshot)=>{
 
-        _self.topList.push(snapshot.val())
+        v.topList.push(snapshot.val())
 
-        _self.topList.sort((a,b)=>{
+        v.topList.sort((a,b)=>{
           return b.count - a.count
         })
 

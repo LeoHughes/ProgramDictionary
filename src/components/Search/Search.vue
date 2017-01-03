@@ -100,21 +100,21 @@
     },
     methods: {
       search(event) {
-        let _self = this;
+        let v = this
 
-        if(_self.key === ''){
+        if(v.key === ''){
           document.getElementById('searchInput').focus()
           return
         }else{
 
-          ref.orderByChild('name').equalTo(_self.key).on("value",(snapshot)=>{
+          ref.orderByChild('name').equalTo(v.key).on("value",(snapshot)=>{
             var data = snapshot.val()
 
-            _self.showResult = true
-            _self.result = []
+            v.showResult = true
+            v.result = []
 
             snapshot.forEach((snap)=>{
-              _self.result.push(snap.val())
+              v.result.push(snap.val())
             })
           })
 

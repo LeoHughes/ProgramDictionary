@@ -226,7 +226,7 @@ transition(name="transition-animation")
           }
         }
 
-        const v = this;
+        const v = this
 
         //保存数据
         ref.child(v.word.name).set(v.word).then(()=>{
